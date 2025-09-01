@@ -71,11 +71,16 @@ struct NewsView: View {
                 .padding(.bottom, 20)
                 
                 // Stories content
-                if hnService.isLoading && currentStories.isEmpty {
+                if currentStories.isEmpty && hnService.isLoading {
                     Spacer()
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                        .scaleEffect(1.2)
+                    VStack(spacing: 16) {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color(red: 0.95, green: 0.77, blue: 0.06)))
+                            .scaleEffect(1.2)
+                        Text("Loading stories...")
+                            .font(.system(size: 14))
+                            .foregroundColor(.white.opacity(0.6))
+                    }
                     Spacer()
                 } else if let error = hnService.errorMessage {
                     Spacer()
@@ -88,6 +93,30 @@ struct NewsView: View {
                             .multilineTextAlignment(.center)
                             .padding(.horizontal)
                         Button("Retry") {
+                            Task {
+                                await hnService.loadStories(type: selectedType)
+                            }
+                        }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(Color.white.opacity(0.1))
+                        )
+                    }
+                    Spacer()
+                } else if currentStories.isEmpty {
+                    // Empty state when no stories
+                    Spacer()
+                    VStack(spacing: 20) {
+                        Image(systemName: "doc.text")
+                            .font(.system(size: 40))
+                            .foregroundColor(.white.opacity(0.3))
+                        Text("No stories available")
+                            .font(.system(size: 16))
+                            .foregroundColor(.white.opacity(0.6))
+                        Button("Refresh") {
                             Task {
                                 await hnService.loadStories(type: selectedType)
                             }

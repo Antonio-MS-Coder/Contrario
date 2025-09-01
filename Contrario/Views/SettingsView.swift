@@ -5,100 +5,232 @@ struct SettingsView: View {
     @State private var showingAbout = false
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                // Reliable gradient background with fallback colors
-                LinearGradient(
-                    colors: [
-                        Color(red: 0.98, green: 0.98, blue: 0.97),
-                        Color(red: 0.94, green: 0.94, blue: 0.93)
-                    ],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-                .ignoresSafeArea()
-                
-                VStack(spacing: 20) {
+        ZStack {
+            // Consistent dark gradient background matching HomeView and NewsView
+            LinearGradient(
+                colors: [
+                    Color(red: 0.11, green: 0.11, blue: 0.14),
+                    Color(red: 0.18, green: 0.16, blue: 0.24)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                // Header matching HomeView style
+                VStack(alignment: .leading, spacing: 8) {
                     Text("Settings")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color(red: 0.11, green: 0.11, blue: 0.13))
-                        .padding(.top)
+                        .font(.system(size: 24, weight: .semibold))
+                        .foregroundColor(.white)
                     
+                    Text("Customize your experience")
+                        .font(.system(size: 14))
+                        .foregroundColor(.white.opacity(0.6))
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 24)
+                .padding(.top, 60)
+                .padding(.bottom, 30)
+                
+                ScrollView {
                     VStack(spacing: 16) {
-                        // Dark Mode Toggle
-                        HStack {
-                            Label("Dark Mode", systemImage: "moon.fill")
-                                .foregroundColor(Color(red: 0.11, green: 0.11, blue: 0.13))
+                        // Preferences Section
+                        VStack(spacing: 12) {
+                            Text("PREFERENCES")
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundColor(.white.opacity(0.5))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 24)
                             
-                            Spacer()
+                            // Dark Mode Toggle
+                            SettingRow(
+                                icon: "moon.fill",
+                                title: "Dark Mode",
+                                toggle: $settingsManager.isDarkMode
+                            )
                             
-                            Toggle("", isOn: $settingsManager.isDarkMode)
-                                .labelsHidden()
-                                .tint(Color(red: 0.59, green: 0.40, blue: 0.27))
-                        }
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(12)
-                        .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
-                        
-                        // Notifications Toggle
-                        HStack {
-                            Label("Daily Facts", systemImage: "bell.fill")
-                                .foregroundColor(Color(red: 0.11, green: 0.11, blue: 0.13))
+                            // Notifications Toggle
+                            SettingRow(
+                                icon: "bell.fill",
+                                title: "Daily Facts",
+                                toggle: $settingsManager.notificationsEnabled
+                            )
                             
-                            Spacer()
-                            
-                            Toggle("", isOn: $settingsManager.notificationsEnabled)
-                                .labelsHidden()
-                                .tint(Color(red: 0.59, green: 0.40, blue: 0.27))
-                        }
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(12)
-                        .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
-                        
-                        // Notification Time
-                        if settingsManager.notificationsEnabled {
-                            HStack {
-                                Label("Notification Time", systemImage: "clock.fill")
-                                    .foregroundColor(Color(red: 0.11, green: 0.11, blue: 0.13))
-                                
-                                Spacer()
-                                
-                                DatePicker("", selection: $settingsManager.dailyFactTime, displayedComponents: .hourAndMinute)
-                                    .labelsHidden()
+                            // Notification Time (conditional)
+                            if settingsManager.notificationsEnabled {
+                                SettingTimeRow(
+                                    icon: "clock.fill",
+                                    title: "Notification Time",
+                                    time: $settingsManager.dailyFactTime
+                                )
+                                .transition(.opacity.combined(with: .move(edge: .top)))
                             }
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(12)
-                            .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
                         }
-                    }
-                    .padding(.horizontal)
-                    
-                    Spacer()
-                    
-                    // About Section
-                    VStack(spacing: 10) {
-                        Text("Contrario")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(red: 0.11, green: 0.11, blue: 0.13))
+                        .padding(.bottom, 30)
                         
-                        Text("Think Different")
-                            .font(.caption)
-                            .foregroundColor(Color(red: 0.45, green: 0.45, blue: 0.50))
+                        // About Section
+                        VStack(spacing: 12) {
+                            Text("ABOUT")
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundColor(.white.opacity(0.5))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 24)
+                            
+                            VStack(spacing: 8) {
+                                HStack {
+                                    Text("Version")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.white.opacity(0.7))
+                                    Spacer()
+                                    Text("1.0")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.white.opacity(0.5))
+                                }
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 16)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(Color.white.opacity(0.05))
+                                )
+                                
+                                HStack {
+                                    Text("Developer")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.white.opacity(0.7))
+                                    Spacer()
+                                    Text("Contrario Team")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.white.opacity(0.5))
+                                }
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 16)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(Color.white.opacity(0.05))
+                                )
+                            }
+                            .padding(.horizontal, 24)
+                        }
                         
-                        Text("Version 1.0")
-                            .font(.caption2)
-                            .foregroundColor(Color(red: 0.45, green: 0.45, blue: 0.50).opacity(0.7))
+                        Spacer(minLength: 50)
+                        
+                        // App Branding
+                        VStack(spacing: 8) {
+                            Image(systemName: "brain.head.profile")
+                                .font(.system(size: 40))
+                                .foregroundColor(Color(red: 0.95, green: 0.77, blue: 0.06))
+                            
+                            Text("Contrario")
+                                .font(.system(size: 20, weight: .semibold))
+                                .foregroundColor(.white)
+                            
+                            Text("Challenge your thinking")
+                                .font(.system(size: 12))
+                                .foregroundColor(.white.opacity(0.5))
+                        }
+                        .padding(.bottom, 40)
                     }
-                    .padding(.bottom, 30)
                 }
             }
-            .navigationBarHidden(true)
         }
         .preferredColorScheme(settingsManager.isDarkMode ? .dark : .light)
+    }
+}
+
+// MARK: - Setting Row Component
+struct SettingRow: View {
+    let icon: String
+    let title: String
+    @Binding var toggle: Bool
+    
+    var body: some View {
+        HStack {
+            HStack(spacing: 12) {
+                Image(systemName: icon)
+                    .font(.system(size: 16))
+                    .foregroundColor(Color(red: 0.95, green: 0.77, blue: 0.06))
+                    .frame(width: 24)
+                
+                Text(title)
+                    .font(.system(size: 15))
+                    .foregroundColor(.white)
+            }
+            
+            Spacer()
+            
+            Toggle("", isOn: $toggle)
+                .labelsHidden()
+                .tint(Color(red: 0.95, green: 0.77, blue: 0.06))
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 16)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            Color(red: 0.20, green: 0.20, blue: 0.24),
+                            Color(red: 0.16, green: 0.16, blue: 0.20)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.white.opacity(0.06), lineWidth: 1)
+                )
+        )
+        .padding(.horizontal, 24)
+    }
+}
+
+// MARK: - Setting Time Row Component
+struct SettingTimeRow: View {
+    let icon: String
+    let title: String
+    @Binding var time: Date
+    
+    var body: some View {
+        HStack {
+            HStack(spacing: 12) {
+                Image(systemName: icon)
+                    .font(.system(size: 16))
+                    .foregroundColor(Color(red: 0.95, green: 0.77, blue: 0.06))
+                    .frame(width: 24)
+                
+                Text(title)
+                    .font(.system(size: 15))
+                    .foregroundColor(.white)
+            }
+            
+            Spacer()
+            
+            DatePicker("", selection: $time, displayedComponents: .hourAndMinute)
+                .labelsHidden()
+                .colorScheme(.dark)
+                .accentColor(Color(red: 0.95, green: 0.77, blue: 0.06))
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 16)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            Color(red: 0.20, green: 0.20, blue: 0.24),
+                            Color(red: 0.16, green: 0.16, blue: 0.20)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.white.opacity(0.06), lineWidth: 1)
+                )
+        )
+        .padding(.horizontal, 24)
     }
 }

@@ -29,26 +29,19 @@ struct ContentView: View {
                         }
                         .tag(0)
                     
-                    CategoriesView()
-                        .tabItem {
-                            Image(systemName: "network")
-                            Text("Explore")
-                        }
-                        .tag(1)
-                    
                     NewsView()
                         .tabItem {
-                            Image(systemName: "eye.fill")
-                            Text("Lens")
+                            Image(systemName: "doc.text")
+                            Text("News")
                         }
-                        .tag(2)
+                        .tag(1)
                     
                     SettingsView()
                         .tabItem {
                             Image(systemName: "gear")
                             Text("Settings")
                         }
-                        .tag(3)
+                        .tag(2)
                 }
                 .accentColor(Color("AccentBrown"))
             }

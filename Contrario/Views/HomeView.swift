@@ -10,6 +10,17 @@ struct HomeView: View {
     @State private var showingShareSheet = false
     @State private var shareItem: ContraryFact?
     
+    // MARK: - Performance Optimization: Memoized Properties
+    private var currentFact: ContraryFact? {
+        guard currentFactIndex < factsManager.facts.count else { return nil }
+        return factsManager.facts[currentFactIndex]
+    }
+    
+    private var isCurrentFactFavorite: Bool {
+        guard let fact = currentFact else { return false }
+        return favoritesManager.isFavorite(fact)
+    }
+    
     var userName: String {
         UserDefaults.standard.string(forKey: "userName") ?? ""
     }
@@ -79,8 +90,8 @@ struct HomeView: View {
                     GeometryReader { geometry in
                         if !factsManager.facts.isEmpty {
                             ZStack {
-                                // Background cards (stack effect)
-                                ForEach(0..<min(3, factsManager.facts.count), id: \.self) { index in
+                                // Optimized: Limit background cards to 2 for performance
+                                ForEach(0..<min(2, factsManager.facts.count), id: \.self) { index in
                                     if currentFactIndex + index < factsManager.facts.count {
                                         MinimalFactCard(
                                             fact: factsManager.facts[currentFactIndex + index],
@@ -88,58 +99,24 @@ struct HomeView: View {
                                             isTopCard: index == 0,
                                             progressManager: progressManager
                                         )
-                                        .offset(y: CGFloat(index) * 10)
-                                        .scaleEffect(1 - (CGFloat(index) * 0.03))
-                                        .opacity(index == 0 ? 1 : 0.8)
-                                        .zIndex(Double(3 - index))
+                                        .offset(y: CGFloat(index) * 8) // Reduced offset for better performance
+                                        .scaleEffect(1 - (CGFloat(index) * 0.02)) // Reduced scale effect
+                                        .opacity(index == 0 ? 1 : 0.7)
+                                        .zIndex(Double(2 - index))
                                     }
                                 }
                                 
-                                // Top interactive card
-                                if currentFactIndex < factsManager.facts.count {
+                                // Top interactive card - Optimized with memoized properties
+                                if let currentFact = currentFact {
                                     MinimalFactCard(
-                                        fact: factsManager.facts[currentFactIndex],
-                                        isFavorite: favoritesManager.isFavorite(factsManager.facts[currentFactIndex]),
+                                        fact: currentFact,
+                                        isFavorite: isCurrentFactFavorite,
                                         isTopCard: true,
                                         progressManager: progressManager
                                     )
                                     .offset(cardOffset)
                                     .rotationEffect(.degrees(Double(cardOffset.width) / 20))
-                                    .gesture(
-                                        DragGesture()
-                                            .onChanged { value in
-                                                cardOffset = value.translation
-                                            }
-                                            .onEnded { value in
-                                                if abs(value.translation.width) > 100 {
-                                                    // Swipe action
-                                                    withAnimation(.spring()) {
-                                                        cardOffset = CGSize(
-                                                            width: value.translation.width > 0 ? 500 : -500,
-                                                            height: 0
-                                                        )
-                                                    }
-                                                    
-                                                    // Mark as discovered
-                                                    progressManager.markFactAsDiscovered(factsManager.facts[currentFactIndex])
-                                                    
-                                                    // Move to next fact
-                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                                        cardOffset = .zero
-                                                        if currentFactIndex < factsManager.facts.count - 1 {
-                                                            currentFactIndex += 1
-                                                        } else {
-                                                            currentFactIndex = 0
-                                                        }
-                                                    }
-                                                } else {
-                                                    // Snap back
-                                                    withAnimation(.spring()) {
-                                                        cardOffset = .zero
-                                                    }
-                                                }
-                                            }
-                                    )
+                                    .gesture(createSwipeGesture(for: currentFact))
                                     .zIndex(10)
                                 }
                             }
@@ -171,40 +148,33 @@ struct HomeView: View {
                                 .foregroundColor(.white.opacity(0.6))
                         }
                         
-                        // Favorite
+                        // Favorite - Optimized with memoized properties
                         Button(action: {
-                            if currentFactIndex < factsManager.facts.count {
-                                let fact = factsManager.facts[currentFactIndex]
-                                if favoritesManager.isFavorite(fact) {
-                                    favoritesManager.removeFavorite(fact)
-                                } else {
-                                    favoritesManager.addFavorite(fact)
-                                }
+                            guard let fact = currentFact else { return }
+                            if isCurrentFactFavorite {
+                                favoritesManager.removeFavorite(fact)
+                            } else {
+                                favoritesManager.addFavorite(fact)
                             }
                         }) {
-                            Image(systemName: favoritesManager.isFavorite(factsManager.facts.isEmpty ? 
-                                ContraryFact(text: "", category: "", source: "", contraryInsight: "") : 
-                                factsManager.facts[currentFactIndex]) ? "heart.fill" : "heart")
+                            Image(systemName: isCurrentFactFavorite ? "heart.fill" : "heart")
                                 .font(.system(size: 20))
-                                .foregroundColor(favoritesManager.isFavorite(factsManager.facts.isEmpty ? 
-                                    ContraryFact(text: "", category: "", source: "", contraryInsight: "") : 
-                                    factsManager.facts[currentFactIndex]) ? 
+                                .foregroundColor(isCurrentFactFavorite ? 
                                     Color(red: 0.91, green: 0.12, blue: 0.39) : .white.opacity(0.6))
                         }
-                        .disabled(factsManager.facts.isEmpty)
+                        .disabled(currentFact == nil)
                         
-                        // Share
+                        // Share - Optimized
                         Button(action: {
-                            if currentFactIndex < factsManager.facts.count {
-                                shareItem = factsManager.facts[currentFactIndex]
-                                showingShareSheet = true
-                            }
+                            guard let fact = currentFact else { return }
+                            shareItem = fact
+                            showingShareSheet = true
                         }) {
                             Image(systemName: "square.and.arrow.up")
                                 .font(.system(size: 20))
                                 .foregroundColor(.white.opacity(0.6))
                         }
-                        .disabled(factsManager.facts.isEmpty)
+                        .disabled(currentFact == nil)
                     }
                     .padding(.vertical, 30)
                     .padding(.bottom, 20)
@@ -215,6 +185,47 @@ struct HomeView: View {
                 if let fact = shareItem {
                     FactShareSheet(fact: fact)
                 }
+            }
+        }
+    }
+    
+    // MARK: - Performance Optimization: Extracted Gesture
+    private func createSwipeGesture(for fact: ContraryFact) -> some Gesture {
+        DragGesture()
+            .onChanged { value in
+                cardOffset = value.translation
+            }
+            .onEnded { value in
+                handleSwipeGesture(with: value, for: fact)
+            }
+    }
+    
+    private func handleSwipeGesture(with value: DragGesture.Value, for fact: ContraryFact) {
+        if abs(value.translation.width) > 100 {
+            // Swipe action
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                cardOffset = CGSize(
+                    width: value.translation.width > 0 ? 500 : -500,
+                    height: 0
+                )
+            }
+            
+            // Mark as discovered
+            progressManager.markFactAsDiscovered(fact)
+            
+            // Move to next fact with optimized timing
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                cardOffset = .zero
+                if currentFactIndex < factsManager.facts.count - 1 {
+                    currentFactIndex += 1
+                } else {
+                    currentFactIndex = 0
+                }
+            }
+        } else {
+            // Snap back with optimized spring animation
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                cardOffset = .zero
             }
         }
     }

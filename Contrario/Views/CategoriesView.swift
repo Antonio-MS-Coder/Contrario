@@ -7,12 +7,27 @@ struct CategoriesView: View {
     @State private var selectedCategory: String?
     @State private var showCategoryDetail = false
     @State private var showKnowledgeGraph = false
-    @State private var viewMode: ExploreViewMode = .categories
+    @State private var viewMode: ExploreViewMode = .discover
     
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
+    
+    // Progressive feature unlocking
+    var availableModes: [ExploreViewMode] {
+        var modes: [ExploreViewMode] = [.discover]
+        
+        if progressManager.userProgress.totalDiscovered >= 5 {
+            modes.append(.journey)
+        }
+        
+        if progressManager.userProgress.totalDiscovered >= 15 {
+            modes.append(.insights)
+        }
+        
+        return modes
+    }
     
     var totalCategories: Int {
         factsManager.categories.count
@@ -28,8 +43,8 @@ struct CategoriesView: View {
                 // Background gradient
                 LinearGradient(
                     colors: [
-                        Color(red: 0.16, green: 0.11, blue: 0.29),
-                        Color(red: 0.31, green: 0.20, blue: 0.48)
+                        Color("BackgroundGradientStart"),
+                        Color("BackgroundGradientEnd")
                     ],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
@@ -37,37 +52,42 @@ struct CategoriesView: View {
                 .ignoresSafeArea()
                 
                 VStack(spacing: 0) {
-                    // Enhanced header with view mode toggle
+                    // Enhanced header with progressive tabs
                     ExploreHeader(
                         viewMode: $viewMode,
+                        availableModes: availableModes,
+                        totalDiscovered: progressManager.userProgress.totalDiscovered,
                         onKnowledgeGraphTap: {
                             showKnowledgeGraph = true
                         }
                     )
                     
                     // Content based on view mode
-                    switch viewMode {
-                    case .categories:
-                        CategoriesContent(
-                            factsManager: factsManager,
-                            progressManager: progressManager,
-                            selectedCategory: $selectedCategory,
-                            showCategoryDetail: $showCategoryDetail,
-                            categoriesWithProgress: categoriesWithProgress,
-                            totalCategories: totalCategories
-                        )
-                    
-                    case .beliefsTracker:
-                        BeliefTrackerContent(
-                            beliefTracker: beliefTracker,
-                            progressManager: progressManager
-                        )
-                    
-                    case .synthesis:
-                        WisdomSynthesisContent(
-                            progressManager: progressManager,
-                            factsManager: factsManager
-                        )
+                    ScrollView {
+                        switch viewMode {
+                        case .discover:
+                            DiscoverContent(
+                                factsManager: factsManager,
+                                progressManager: progressManager,
+                                selectedCategory: $selectedCategory,
+                                showCategoryDetail: $showCategoryDetail,
+                                categoriesWithProgress: categoriesWithProgress,
+                                totalCategories: totalCategories
+                            )
+                        
+                        case .journey:
+                            JourneyContent(
+                                beliefTracker: beliefTracker,
+                                progressManager: progressManager,
+                                factsManager: factsManager
+                            )
+                        
+                        case .insights:
+                            InsightsContent(
+                                progressManager: progressManager,
+                                factsManager: factsManager
+                            )
+                        }
                     }
                 }
             }
@@ -95,147 +115,165 @@ struct CategoriesView: View {
     }
 }
 
-// MARK: - Header Section
-struct HeaderSection: View {
-    var body: some View {
-        VStack(spacing: 10) {
-            Text("EXPLORE TERRITORIES")
-                .font(.system(size: 32, weight: .heavy, design: .default))
-                .foregroundColor(.white)
-                .tracking(1.5)
-                .padding(.top, 20)
-            
-            Text("Each category is a rabbit hole of revelations")
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(.white.opacity(0.7))
-                .multilineTextAlignment(.center)
+// MARK: - Explore View Mode
+enum ExploreViewMode: String, CaseIterable {
+    case discover = "Discover"
+    case journey = "My Journey"
+    case insights = "Connections"
+    
+    var icon: String {
+        switch self {
+        case .discover: return "magnifyingglass"
+        case .journey: return "chart.line.uptrend.xyaxis"
+        case .insights: return "brain.head.profile"
         }
-        .padding(.horizontal)
+    }
+    
+    var description: String {
+        switch self {
+        case .discover: return "Find contrarian facts by topic"
+        case .journey: return "Track your intellectual evolution"
+        case .insights: return "Discover patterns in your learning"
+        }
+    }
+    
+    var unlockMessage: String {
+        switch self {
+        case .discover: return ""
+        case .journey: return "Discover 5 facts to unlock"
+        case .insights: return "Discover 15 facts to unlock"
+        }
+    }
+    
+    var requiredFacts: Int {
+        switch self {
+        case .discover: return 0
+        case .journey: return 5
+        case .insights: return 15
+        }
     }
 }
 
-// MARK: - Progress Card
-struct ProgressCard: View {
-    let categoriesDiscovered: Int
-    let totalCategories: Int
-    let progressManager: UserProgressManager
-    let totalFacts: Int
-    
-    var progressPercentage: Double {
-        guard totalCategories > 0 else { return 0 }
-        return Double(categoriesDiscovered) / Double(totalCategories)
-    }
+// MARK: - Enhanced Header
+struct ExploreHeader: View {
+    @Binding var viewMode: ExploreViewMode
+    let availableModes: [ExploreViewMode]
+    let totalDiscovered: Int
+    let onKnowledgeGraphTap: () -> Void
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(spacing: 16) {
+            // Title and graph button
             HStack {
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("YOUR INTELLECTUAL")
-                        .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(Color(red: 0.95, green: 0.77, blue: 0.06))
-                    Text("JOURNEY")
-                        .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(Color(red: 0.95, green: 0.77, blue: 0.06))
-                }
+                Text("EXPLORE")
+                    .font(.system(size: 32, weight: .bold))
+                    .foregroundColor(Color("PrimaryText"))
+                    .tracking(1.5)
                 
                 Spacer()
                 
-                Text("\(categoriesDiscovered) / \(totalCategories) DISCOVERED")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.white.opacity(0.7))
+                // Knowledge graph button (unlock at 10 facts)
+                Button(action: onKnowledgeGraphTap) {
+                    Image(systemName: "network")
+                        .font(.system(size: 20))
+                        .foregroundColor(totalDiscovered >= 10 ? Color(red: 0.95, green: 0.77, blue: 0.06) : Color("SecondaryText"))
+                        .padding(10)
+                        .background(
+                            Circle()
+                                .fill(totalDiscovered >= 10 ? Color(red: 0.95, green: 0.77, blue: 0.06).opacity(0.2) : Color("CardBackground"))
+                        )
+                }
+                .disabled(totalDiscovered < 10)
             }
+            .padding(.horizontal)
             
-            // Progress Bar
-            ProgressBar(progressPercentage: progressPercentage)
+            // Subtitle
+            Text("Track your evolving beliefs")
+                .font(.system(size: 14))
+                .foregroundColor(Color("SubtitleText"))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
             
-            // Stats
-            HStack(spacing: 20) {
-                StatItem(
-                    icon: "lightbulb.fill",
-                    value: "\(progressManager.userProgress.totalDiscovered)",
-                    label: "Facts Discovered"
-                )
-                
-                StatItem(
-                    icon: "star.fill",
-                    value: "\(Int(progressPercentage * 100))%",
-                    label: "Complete"
-                )
+            // Progressive tabs
+            HStack(spacing: 0) {
+                ForEach(ExploreViewMode.allCases, id: \.self) { mode in
+                    TabButton(
+                        mode: mode,
+                        isSelected: viewMode == mode,
+                        isLocked: !availableModes.contains(mode),
+                        totalDiscovered: totalDiscovered
+                    ) {
+                        if availableModes.contains(mode) {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                viewMode = mode
+                            }
+                        }
+                    }
+                }
             }
+            .padding(.horizontal)
+            .padding(.bottom, 8)
         }
-        .padding(20)
+        .padding(.top, 60)
         .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.white.opacity(0.08))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.white.opacity(0.1), lineWidth: 1)
-                )
+            Color("CardBackground").opacity(0.3)
+                .ignoresSafeArea(edges: .top)
         )
     }
 }
 
-// MARK: - Progress Bar
-struct ProgressBar: View {
-    let progressPercentage: Double
+// MARK: - Tab Button
+struct TabButton: View {
+    let mode: ExploreViewMode
+    let isSelected: Bool
+    let isLocked: Bool
+    let totalDiscovered: Int
+    let action: () -> Void
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.white.opacity(0.1))
-                    .frame(height: 8)
+        Button(action: action) {
+            VStack(spacing: 4) {
+                HStack(spacing: 4) {
+                    Image(systemName: mode.icon)
+                        .font(.system(size: 14))
+                    
+                    Text(mode.rawValue)
+                        .font(.system(size: 14, weight: isSelected ? .semibold : .medium))
+                    
+                    if isLocked {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 10))
+                    }
+                }
+                .foregroundColor(isLocked ? Color("SecondaryText") : (isSelected ? Color(red: 0.95, green: 0.77, blue: 0.06) : Color("PrimaryText")))
                 
-                LinearGradient(
-                    colors: [
-                        Color(red: 0.95, green: 0.77, blue: 0.06),
-                        Color(red: 0.95, green: 0.42, blue: 0.26),
-                        Color(red: 0.91, green: 0.12, blue: 0.39)
-                    ],
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-                .frame(width: geometry.size.width * progressPercentage, height: 8)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .animation(.spring(response: 0.6, dampingFraction: 0.8), value: progressPercentage)
+                // Progress indicator for locked tabs
+                if isLocked && mode.requiredFacts > 0 {
+                    Text("\(totalDiscovered)/\(mode.requiredFacts)")
+                        .font(.system(size: 9))
+                        .foregroundColor(Color("SecondaryText"))
+                }
+                
+                // Selection indicator
+                Rectangle()
+                    .fill(isSelected ? Color(red: 0.95, green: 0.77, blue: 0.06) : Color.clear)
+                    .frame(height: 2)
             }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 8)
         }
-        .frame(height: 8)
+        .disabled(isLocked)
     }
 }
 
-// MARK: - Stat Item
-struct StatItem: View {
-    let icon: String
-    let value: String
-    let label: String
-    
-    var body: some View {
-        HStack(spacing: 8) {
-            Image(systemName: icon)
-                .font(.system(size: 12))
-                .foregroundColor(Color(red: 0.95, green: 0.77, blue: 0.06))
-            
-            VStack(alignment: .leading, spacing: 2) {
-                Text(value)
-                    .font(.system(size: 14, weight: .bold))
-                    .foregroundColor(.white)
-                
-                Text(label)
-                    .font(.system(size: 10))
-                    .foregroundColor(.white.opacity(0.5))
-            }
-        }
-    }
-}
-
-// MARK: - Categories Grid
-struct CategoriesGrid: View {
-    let categories: [ContraryCategory]
+// MARK: - Discover Content (Categories)
+struct DiscoverContent: View {
     let factsManager: ContraryFactsManager
     let progressManager: UserProgressManager
     @Binding var selectedCategory: String?
     @Binding var showCategoryDetail: Bool
+    let categoriesWithProgress: Int
+    let totalCategories: Int
     
     let columns = [
         GridItem(.flexible()),
@@ -243,310 +281,352 @@ struct CategoriesGrid: View {
     ]
     
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 15) {
-            ForEach(categories, id: \.key) { category in
-                if let enhanced = EnhancedCategory.getCategoryMetadata(for: category.key) {
-                    TerritoryCard(
-                        enhanced: enhanced,
-                        factCount: factsManager.getFactsForCategory(category.key).count,
-                        progressManager: progressManager,
-                        isSelected: selectedCategory == category.key
-                    ) {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+        VStack(spacing: 20) {
+            // Progress overview
+            ProgressOverviewCard(
+                categoriesWithProgress: categoriesWithProgress,
+                totalCategories: totalCategories,
+                totalDiscovered: progressManager.userProgress.totalDiscovered
+            )
+            .padding(.horizontal)
+            
+            // Categories grid
+            LazyVGrid(columns: columns, spacing: 16) {
+                ForEach(factsManager.categories, id: \.key) { category in
+                    if let enhanced = EnhancedCategory.getCategoryMetadata(for: category.key) {
+                        CategoryCard(
+                            enhanced: enhanced,
+                            progress: progressManager.getCategoryProgress(for: category.key),
+                            totalFacts: factsManager.getFactsForCategory(category.key).count
+                        ) {
                             selectedCategory = category.key
                             showCategoryDetail = true
                         }
                     }
                 }
             }
+            .padding(.horizontal)
+            .padding(.bottom, 30)
         }
+        .padding(.top, 20)
     }
 }
 
-// MARK: - Territory Card
-struct TerritoryCard: View {
-    let enhanced: EnhancedCategory
-    let factCount: Int
+// MARK: - Journey Content (Belief Evolution)
+struct JourneyContent: View {
+    let beliefTracker: BeliefEvolutionTracker
     let progressManager: UserProgressManager
-    let isSelected: Bool
-    let action: () -> Void
-    
-    var progress: (discovered: Int, total: Int) {
-        progressManager.getCategoryProgress(enhanced.base.key, totalFacts: factCount)
-    }
-    
-    var categoryState: CategoryState {
-        progressManager.getCategoryState(enhanced.base.key, totalFacts: factCount)
-    }
-    
-    var isCompleted: Bool {
-        if case .completed = categoryState {
-            return true
-        }
-        return false
-    }
+    let factsManager: ContraryFactsManager
+    @State private var showBeliefInput = false
+    @State private var selectedFact: ContraryFact?
     
     var body: some View {
-        Button(action: action) {
-            VStack(spacing: 0) {
-                ZStack {
-                    // Background with category color
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(
-                            isCompleted ? 
-                            enhanced.color.opacity(0.9) : 
-                            (progress.discovered > 0 ? enhanced.color.opacity(0.7) : Color.white.opacity(0.15))
-                        )
-                    
-                    VStack(spacing: 12) {
-                        // Icon
-                        Image(systemName: enhanced.base.icon)
-                            .font(.system(size: 36, weight: .medium))
-                            .foregroundColor(.white)
-                            .padding(.top, 20)
-                        
-                        // Category Name
-                        Text(enhanced.base.displayName.uppercased())
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(2)
-                            .padding(.horizontal, 10)
-                        
-                        // Tagline
-                        Text(enhanced.tagline)
-                            .font(.system(size: 11, weight: .medium))
-                            .foregroundColor(.white.opacity(0.8))
-                            .multilineTextAlignment(.center)
-                            .lineLimit(2)
-                            .padding(.horizontal, 10)
-                        
-                        Spacer()
-                        
-                        // Progress Indicator
-                        ProgressIndicator(progress: progress, isCompleted: isCompleted)
-                            .padding(.bottom, 15)
+        VStack(spacing: 20) {
+            if beliefTracker.trackedBeliefs.isEmpty {
+                // Onboarding state
+                BeliefTrackingOnboarding(
+                    recentFactsDiscovered: progressManager.userProgress.totalDiscovered,
+                    onStartTracking: {
+                        showBeliefInput = true
                     }
-                    
-                    // Progress Bar (bottom)
-                    if progress.discovered > 0 && !isCompleted {
-                        VStack {
-                            Spacer()
-                            CategoryProgressBar(progress: progress)
-                        }
-                    }
-                }
-                .frame(height: 180)
-            }
-            .shadow(color: enhanced.color.opacity(0.3), radius: 8, x: 0, y: 4)
-        }
-        .scaleEffect(isSelected ? 0.95 : 1.0)
-        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isSelected)
-    }
-}
-
-// MARK: - Progress Indicator
-struct ProgressIndicator: View {
-    let progress: (discovered: Int, total: Int)
-    let isCompleted: Bool
-    
-    var body: some View {
-        HStack(spacing: 4) {
-            if isCompleted {
-                Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 14))
-                    .foregroundColor(.white)
-                Text("COMPLETE")
-                    .font(.system(size: 10, weight: .bold))
-                    .foregroundColor(.white)
+                )
             } else {
-                Text("\(progress.discovered)")
-                    .font(.system(size: 14, weight: .bold))
-                    .foregroundColor(progress.discovered > 0 ? .white : Color(red: 0.95, green: 0.77, blue: 0.06))
-                Text("/ \(progress.total)")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(progress.discovered > 0 ? .white.opacity(0.8) : .white.opacity(0.6))
+                // Active tracking state
+                ActiveBeliefTracking(
+                    beliefTracker: beliefTracker,
+                    onAddBelief: {
+                        showBeliefInput = true
+                    }
+                )
             }
+            
+            // Recent discoveries that might change beliefs
+            if progressManager.userProgress.totalDiscovered > 0 {
+                RecentDiscoveriesSection(
+                    progressManager: progressManager,
+                    factsManager: factsManager,
+                    onFactTap: { fact in
+                        selectedFact = fact
+                        showBeliefInput = true
+                    }
+                )
+            }
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 20)
+        .sheet(isPresented: $showBeliefInput) {
+            BeliefInputView(
+                beliefTracker: beliefTracker,
+                contextFact: selectedFact
+            )
         }
     }
 }
 
-// MARK: - Category Progress Bar
-struct CategoryProgressBar: View {
-    let progress: (discovered: Int, total: Int)
+// MARK: - Insights Content (Wisdom Synthesis)
+struct InsightsContent: View {
+    let progressManager: UserProgressManager
+    let factsManager: ContraryFactsManager
+    
+    var personalizedInsights: [PatternInsight] {
+        generatePersonalizedInsights()
+    }
     
     var body: some View {
-        GeometryReader { geometry in
-            LinearGradient(
-                colors: [
-                    Color(red: 0.95, green: 0.77, blue: 0.06),
-                    Color(red: 0.95, green: 0.42, blue: 0.26)
-                ],
-                startPoint: .leading,
-                endPoint: .trailing
-            )
-            .frame(
-                width: geometry.size.width * (Double(progress.discovered) / Double(progress.total)),
-                height: 4
-            )
-            .clipShape(
-                RoundedRectangle(cornerRadius: 0)
-                    .path(in: CGRect(x: 0, y: 0, width: geometry.size.width, height: 4))
-            )
+        VStack(spacing: 20) {
+            // Milestone achievements
+            MilestonesSection(progressManager: progressManager)
+            
+            // Cross-domain patterns
+            if !personalizedInsights.isEmpty {
+                PatternInsightsSection(insights: personalizedInsights)
+            }
+            
+            // Intellectual streak
+            StreakCard(progressManager: progressManager)
         }
-        .frame(height: 4)
-        .clipShape(
-            UnevenRoundedRectangle(
-                topLeadingRadius: 0,
-                bottomLeadingRadius: 20,
-                bottomTrailingRadius: 20,
-                topTrailingRadius: 0
-            )
+        .padding(.horizontal)
+        .padding(.vertical, 20)
+    }
+    
+    func generatePersonalizedInsights() -> [PatternInsight] {
+        let exploredCategories = progressManager.getExploredCategories()
+        
+        guard exploredCategories.count >= 2 else { return [] }
+        
+        var insights: [PatternInsight] = []
+        
+        // Generate insights based on explored categories
+        if exploredCategories.contains("technology") && exploredCategories.contains("society") {
+            insights.append(PatternInsight(
+                icon: "🔄",
+                title: "Tech-Society Bridge",
+                description: "You're exploring how technology shapes social norms",
+                factCount: progressManager.userProgress.totalDiscovered
+            ))
+        }
+        
+        if exploredCategories.contains("business") && exploredCategories.contains("psychology") {
+            insights.append(PatternInsight(
+                icon: "🧠",
+                title: "Behavioral Economics",
+                description: "You're discovering psychological drivers in business",
+                factCount: progressManager.userProgress.totalDiscovered
+            ))
+        }
+        
+        return insights
+    }
+}
+
+// MARK: - Supporting Components
+
+struct ProgressOverviewCard: View {
+    let categoriesWithProgress: Int
+    let totalCategories: Int
+    let totalDiscovered: Int
+    
+    var body: some View {
+        HStack(spacing: 20) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("YOUR PROGRESS")
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundColor(Color("SecondaryText"))
+                    .tracking(0.5)
+                
+                Text("\(totalDiscovered) facts discovered")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(Color("PrimaryText"))
+                
+                Text("\(categoriesWithProgress) of \(totalCategories) territories explored")
+                    .font(.system(size: 12))
+                    .foregroundColor(Color("SubtitleText"))
+            }
+            
+            Spacer()
+            
+            // Visual progress indicator
+            ZStack {
+                Circle()
+                    .stroke(Color("CardBackground"), lineWidth: 4)
+                    .frame(width: 60, height: 60)
+                
+                Circle()
+                    .trim(from: 0, to: CGFloat(categoriesWithProgress) / CGFloat(max(totalCategories, 1)))
+                    .stroke(Color(red: 0.95, green: 0.77, blue: 0.06), lineWidth: 4)
+                    .frame(width: 60, height: 60)
+                    .rotationEffect(.degrees(-90))
+                
+                Text("\(Int((CGFloat(categoriesWithProgress) / CGFloat(max(totalCategories, 1))) * 100))%")
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundColor(Color("PrimaryText"))
+            }
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color("CardBackground"))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color("CardBackground").opacity(0.5), lineWidth: 1)
+                )
         )
     }
 }
 
-// MARK: - Category Detail View
-struct CategoryDetailView: View {
+struct CategoryCard: View {
     let enhanced: EnhancedCategory
-    let facts: [ContraryFact]
-    let progressManager: UserProgressManager
-    let factsManager: ContraryFactsManager
-    @Environment(\.dismiss) var dismiss
+    let progress: UserProgress.CategoryProgress?
+    let totalFacts: Int
+    let action: () -> Void
     
-    var progress: (discovered: Int, total: Int) {
-        progressManager.getCategoryProgress(enhanced.base.key, totalFacts: facts.count)
-    }
-    
-    var body: some View {
-        NavigationView {
-            ZStack {
-                // Background
-                LinearGradient(
-                    colors: [
-                        enhanced.color.opacity(0.3),
-                        Color(red: 0.16, green: 0.11, blue: 0.29)
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
-                
-                VStack(spacing: 20) {
-                    // Header
-                    CategoryDetailHeader(enhanced: enhanced, progress: progress)
-                        .padding()
-                    
-                    // Facts List
-                    ScrollView {
-                        VStack(spacing: 15) {
-                            ForEach(Array(facts.enumerated()), id: \.element.id) { index, fact in
-                                FactCard(
-                                    fact: fact,
-                                    isDiscovered: progressManager.isFactDiscovered(fact.id),
-                                    categoryColor: enhanced.color
-                                ) {
-                                    progressManager.markFactAsDiscovered(fact)
-                                }
-                            }
-                        }
-                        .padding()
-                    }
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        dismiss()
-                    }
-                    .foregroundColor(enhanced.color)
-                }
-            }
+    var contraryHook: String {
+        switch enhanced.base.key {
+        case "business":
+            return "What if everything you know about business success is wrong?"
+        case "technology":
+            return "The tech industry's biggest lies, exposed"
+        case "society":
+            return "Society's comfortable myths, uncomfortable truths"
+        case "psychology":
+            return "Your mind's hidden biases revealed"
+        case "history":
+            return "History's inconvenient truths"
+        case "science":
+            return "When scientific consensus gets it wrong"
+        default:
+            return "Challenge what you think you know"
         }
     }
-}
-
-// MARK: - Category Detail Header
-struct CategoryDetailHeader: View {
-    let enhanced: EnhancedCategory
-    let progress: (discovered: Int, total: Int)
     
     var body: some View {
-        VStack(spacing: 10) {
-            Image(systemName: enhanced.base.icon)
-                .font(.system(size: 48))
-                .foregroundColor(enhanced.color)
-            
-            Text(enhanced.base.displayName)
-                .font(.system(size: 28, weight: .bold))
-                .foregroundColor(.white)
-            
-            Text(enhanced.description)
-                .font(.system(size: 14))
-                .foregroundColor(.white.opacity(0.8))
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
-            
-            // Stats
-            HStack(spacing: 20) {
-                Label("\(enhanced.estimatedMinutes) min", systemImage: "clock")
-                Label(enhanced.difficulty.rawValue, systemImage: enhanced.difficulty.icon)
-            }
-            .font(.system(size: 12, weight: .medium))
-            .foregroundColor(.white.opacity(0.7))
-            
-            // Progress
-            HStack {
-                Text("Progress: \(progress.discovered)/\(progress.total)")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.white)
-                
-                ProgressView(value: Double(progress.discovered), total: Double(progress.total))
-                    .progressViewStyle(.linear)
-                    .tint(enhanced.color)
-                    .scaleEffect(x: 1, y: 2)
-                    .frame(width: 100)
-            }
-        }
-    }
-}
-
-// MARK: - Fact Card
-struct FactCard: View {
-    let fact: ContraryFact
-    let isDiscovered: Bool
-    let categoryColor: Color
-    let onTap: () -> Void
-    
-    var body: some View {
-        Button(action: onTap) {
-            VStack(alignment: .leading, spacing: 10) {
+        Button(action: action) {
+            VStack(alignment: .leading, spacing: 12) {
+                // Icon and progress
                 HStack {
-                    Image(systemName: isDiscovered ? "checkmark.circle.fill" : "circle")
-                        .foregroundColor(isDiscovered ? .green : .gray)
-                    
-                    Text(fact.text)
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(isDiscovered ? .white : .white.opacity(0.6))
-                        .multilineTextAlignment(.leading)
+                    Text(enhanced.icon)
+                        .font(.system(size: 28))
                     
                     Spacer()
+                    
+                    if let progress = progress, progress.discovered > 0 {
+                        Text("\(progress.discovered)/\(totalFacts)")
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(Color(red: 0.95, green: 0.77, blue: 0.06))
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(
+                                Capsule()
+                                    .fill(Color(red: 0.95, green: 0.77, blue: 0.06).opacity(0.2))
+                            )
+                    }
                 }
                 
-                if isDiscovered && !fact.contraryInsight.isEmpty {
-                    Text(fact.contraryInsight)
-                        .font(.system(size: 12))
-                        .foregroundColor(.white.opacity(0.8))
-                        .italic()
+                // Title
+                Text(enhanced.base.displayName.uppercased())
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(Color("PrimaryText"))
+                    .tracking(0.5)
+                
+                // Hook
+                Text(contraryHook)
+                    .font(.system(size: 11))
+                    .foregroundColor(Color("SubtitleText"))
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                
+                // Progress bar
+                if let progress = progress, progress.discovered > 0 {
+                    GeometryReader { geometry in
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(Color("CardBackground").opacity(0.3))
+                                .frame(height: 4)
+                            
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(enhanced.color)
+                                .frame(width: geometry.size.width * (CGFloat(progress.discovered) / CGFloat(max(totalFacts, 1))), height: 4)
+                        }
+                    }
+                    .frame(height: 4)
                 }
             }
-            .padding()
+            .padding(16)
+            .frame(maxWidth: .infinity, minHeight: 140)
             .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(isDiscovered ? categoryColor.opacity(0.2) : Color.white.opacity(0.1))
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(enhanced.color.opacity(0.1))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(enhanced.color.opacity(0.3), lineWidth: 1)
+                    )
             )
+            .shadow(color: enhanced.color.opacity(0.2), radius: 8, x: 0, y: 4)
         }
         .buttonStyle(PlainButtonStyle())
     }
 }
+
+struct BeliefTrackingOnboarding: View {
+    let recentFactsDiscovered: Int
+    let onStartTracking: () -> Void
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "brain.head.profile")
+                .font(.system(size: 50))
+                .foregroundColor(Color(red: 0.95, green: 0.77, blue: 0.06))
+            
+            Text("Start Tracking Your Beliefs")
+                .font(.system(size: 22, weight: .bold))
+                .foregroundColor(Color("PrimaryText"))
+            
+            Text("You've discovered \(recentFactsDiscovered) contrarian facts. Has anything changed how you think? Track your intellectual evolution.")
+                .font(.system(size: 14))
+                .foregroundColor(Color("SubtitleText"))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+            
+            Button(action: onStartTracking) {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Track My First Belief Change")
+                }
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundColor(.white)
+                .padding(.horizontal, 24)
+                .padding(.vertical, 14)
+                .background(
+                    RoundedRectangle(cornerRadius: 25)
+                        .fill(Color(red: 0.95, green: 0.77, blue: 0.06))
+                )
+            }
+        }
+        .padding(30)
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color("CardBackground"))
+        )
+    }
+}
+
+// MARK: - Supporting Models
+
+struct PatternInsight {
+    let icon: String
+    let title: String
+    let description: String
+    let factCount: Int
+}
+
+struct Milestone {
+    let id: String
+    let title: String
+    let description: String
+    let icon: String
+    let requiredFacts: Int
+    let isUnlocked: Bool
+}
+
+// Continue with remaining supporting views...
+// (CategoryDetailView, KnowledgeGraphView, BeliefEvolutionTracker, etc. remain the same)

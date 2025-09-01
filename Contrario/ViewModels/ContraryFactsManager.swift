@@ -2,6 +2,9 @@ import SwiftUI
 import Foundation
 
 class ContraryFactsManager: ObservableObject {
+    // Type alias for category
+    typealias Category = ContraryCategory
+    
     @Published var facts: [ContraryFact] = []
     @Published var currentFact: ContraryFact?
     @Published var categories: [ContraryCategory] = []

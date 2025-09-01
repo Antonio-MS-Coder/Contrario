@@ -38,6 +38,16 @@ class UserProgressManager: ObservableObject {
         return userProgress.categoryProgress.filter { !$0.value.discoveredFactIds.isEmpty }.count
     }
     
+    func getCategoryProgress(for category: String) -> UserProgress.CategoryProgress? {
+        return userProgress.categoryProgress[category]
+    }
+    
+    func getExploredCategories() -> [String] {
+        return userProgress.categoryProgress
+            .filter { !$0.value.discoveredFactIds.isEmpty }
+            .map { $0.key }
+    }
+    
     func isFactDiscovered(_ factId: String) -> Bool {
         return userProgress.discoveredFacts.contains(factId)
     }

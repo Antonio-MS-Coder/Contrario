@@ -1,0 +1,181 @@
+{
+  "questions": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": "Marea Baja",
+      "subtitle": "El mar nunca deja de moverse. \nHay momentos en que la marea baja, \ny todo parece quieto, frágil, incluso vacío.\nPero siempre vuelve a subir.\n\nNosotras también somos mareas: \ncambiamos, sentimos, nos agotamos… \ny volvemos a levantarnos.\n\nEsta app es tu faro en esos \nmomentos en que \nla marea está baja.",
+      "isRequired": false,
+      "continueButtonText": "Comenzar mi viaje"
+    },
+    {
+      "id": "name",
+      "type": "text",
+      "title": "¿Cómo te gustaría que te llamemos?",
+      "subtitle": "Tu nombre aparecerá en tus afirmaciones personalizadas",
+      "placeholder": "Escribe tu nombre",
+      "isRequired": true,
+      "skipButtonText": "X",
+      "continueButtonText": "Continuar",
+      "validationRule": {
+        "minLength": 1,
+        "maxLength": 50,
+        "errorMessage": "Por favor ingresa un nombre válido"
+      }
+    },
+    {
+      "id": "stage",
+      "type": "singleChoice",
+      "title": "¿En qué etapa estás?",
+      "subtitle": "Selecciona una opción.",
+      "isRequired": true,
+      "skipButtonText": "X",
+      "continueButtonText": "Continuar",
+      "options": [
+        {"id": "1", "text": "Embarazo", "value": "embarazo"},
+        {"id": "2", "text": "0 a 6 semanas posparto", "value": "0-6"},
+        {"id": "3", "text": "6 semanas a 3 meses", "value": "6-12"},
+        {"id": "4", "text": "3 a 6 meses", "value": "3-6"},
+        {"id": "5", "text": "6 a 12 meses", "value": "6-12m"},
+        {"id": "6", "text": "Más de 12 meses", "value": "12m+"},
+        {"id": "7", "text": "Prefiero no decir", "value": "pref-no-decir"}
+      ]
+    },
+    {
+      "id": "zodiac",
+      "type": "singleChoice",
+      "title": "¿Cuál es tu signo zodiacal?",
+      "subtitle": "Esta información se usará para personalizar tus frases.",
+      "isRequired": false,
+      "skipButtonText": "X",
+      "continueButtonText": "Continuar",
+      "options": [
+        {"id": "1", "text": "Aries", "icon": "♈", "value": "aries"},
+        {"id": "2", "text": "Tauro", "icon": "♉", "value": "tauro"},
+        {"id": "3", "text": "Géminis", "icon": "♊", "value": "geminis"},
+        {"id": "4", "text": "Cáncer", "icon": "♋", "value": "cancer"},
+        {"id": "5", "text": "Leo", "icon": "♌", "value": "leo"},
+        {"id": "6", "text": "Virgo", "icon": "♍", "value": "virgo"},
+        {"id": "7", "text": "Libra", "icon": "♎", "value": "libra"},
+        {"id": "8", "text": "Escorpio", "icon": "♏", "value": "escorpio"},
+        {"id": "9", "text": "Sagitario", "icon": "♐", "value": "sagitario"},
+        {"id": "10", "text": "Capricornio", "icon": "♑", "value": "capricornio"},
+        {"id": "11", "text": "Acuario", "icon": "♒", "value": "acuario"},
+        {"id": "12", "text": "Piscis", "icon": "♓", "value": "piscis"}
+      ]
+    },
+    {
+      "id": "referral",
+      "type": "singleChoice",
+      "title": "¿Cómo conociste Marea Baja?",
+      "subtitle": "Selecciona una opción para continuar",
+      "isRequired": false,
+      "skipButtonText": "Omitir",
+      "continueButtonText": "Continuar",
+      "options": [
+        {"id": "1", "text": "Instagram", "value": "instagram"},
+        {"id": "2", "text": "Amigo/familiar", "value": "friend-family"},
+        {"id": "3", "text": "TikTok", "value": "tiktok"},
+        {"id": "4", "text": "App Store", "value": "app-store"},
+        {"id": "5", "text": "Facebook", "value": "facebook"},
+        {"id": "6", "text": "Búsqueda web", "value": "web-search"},
+        {"id": "7", "text": "Otro", "value": "other"}
+      ]
+    },
+    {
+      "id": "current-mood",
+      "type": "multipleChoice",
+      "title": "¿Cómo te sientes hoy?",
+      "subtitle": "Selecciona todas las emociones que resuenen contigo.",
+      "isRequired": true,
+      "skipButtonText": "X",
+      "continueButtonText": "Continuar",
+      "multipleSelection": true,
+      "options": [
+        {"id": "1", "text": "Agotada y sin energía", "value": "agotada"},
+        {"id": "2", "text": "Ansiosa o con miedo", "value": "ansiosa"},
+        {"id": "3", "text": "Con culpa o insegura", "value": "culpa"},
+        {"id": "4", "text": "Triste sin razón clara", "value": "triste"},
+        {"id": "5", "text": "Agradecida pero abrumada", "value": "agradecida"},
+        {"id": "6", "text": "Irritable o con poca paciencia", "value": "irritable"},
+        {"id": "7", "text": "No estoy segura", "value": "indefinida"}
+      ]
+    },
+    {
+      "id": "challenges",
+      "type": "multipleChoice",
+      "title": "¿Qué es lo que más te cuesta en este momento?",
+      "subtitle": "Selecciona todas las que apliquen.",
+      "isRequired": false,
+      "skipButtonText": "X",
+      "continueButtonText": "Continuar",
+      "multipleSelection": true,
+      "options": [
+        {"id": "1", "text": "Dormir y descansar", "value": "dormir"},
+        {"id": "2", "text": "Confiar en que lo estoy haciendo bien", "value": "confianza"},
+        {"id": "3", "text": "Darme un tiempo para mí", "value": "tiempo-para-mi"},
+        {"id": "4", "text": "Manejar la culpa o el miedo", "value": "culpa-miedo"},
+        {"id": "5", "text": "Aceptar mi cuerpo y mis cambios", "value": "cuerpo"},
+        {"id": "6", "text": "Sentirme conectada con mi bebé", "value": "conexion-bebe"}
+      ]
+    },
+    {
+      "id": "needs",
+      "type": "multipleChoice",
+      "title": "¿Qué te gustaría recibir de Marea Baja?",
+      "subtitle": "Selecciona todo lo que quieras.",
+      "isRequired": true,
+      "skipButtonText": "X",
+      "continueButtonText": "Continuar",
+      "multipleSelection": true,
+      "options": [
+        {"id": "1", "text": "Palabras que me hagan sentir menos sola", "value": "menos-sola"},
+        {"id": "2", "text": "Recordatorios de que soy suficiente", "value": "soy-suficiente"},
+        {"id": "3", "text": "Mensajes para bajar la ansiedad", "value": "ansiedad"},
+        {"id": "4", "text": "Frases para reconectar conmigo misma", "value": "reconexion"},
+        {"id": "5", "text": "Reflexiones para terminar el día en paz", "value": "paz-nocturna"}
+      ]
+    },
+    {
+      "id": "notifications",
+      "type": "notificationPermission",
+      "title": "¿Te gustaría recibir una frase diaria?",
+      "subtitle": "Te enviaremos un recordatorio suave cada día con una frase de apoyo",
+      "isRequired": false,
+      "skipButtonText": "Tal vez más tarde",
+      "continueButtonText": "Continuar"
+    },
+    {
+      "id": "notification-time",
+      "type": "timeRange",
+      "title": "¿Cuándo prefieres recibir tus afirmaciones?",
+      "subtitle": "Selecciona tu horario preferido",
+      "isRequired": false,
+      "skipButtonText": "X",
+      "continueButtonText": "Continuar"
+    },
+    {
+      "id": "photo-permission",
+      "type": "photoPermission",
+      "title": "Comparte tus frases favoritas",
+      "subtitle": "Podrás crear hermosas tarjetas y guardarlas en tu galería",
+      "isRequired": false,
+      "skipButtonText": "Omitir por ahora",
+      "continueButtonText": "Continuar"
+    },
+    {
+      "id": "tracking-permission",
+      "type": "trackingPermission",
+      "title": "Personaliza tu experiencia",
+      "subtitle": "Nos ayuda a mostrarte contenido más relevante y mejorar la app",
+      "isRequired": false,
+      "skipButtonText": "Omitir",
+      "continueButtonText": "Continuar"
+    }
+  ],
+  "completionMessage": {
+    "title": "¡Todo listo!",
+    "subtitle": "Estamos aquí para acompañarte en este viaje de crecimiento personal",
+    "buttonText": "Comenzar"
+  }
+}

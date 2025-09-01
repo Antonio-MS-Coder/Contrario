@@ -1,0 +1,182 @@
+[
+    {
+        "text": "The best startup ideas seem like bad ideas at first",
+        "category": "business",
+        "source": "Peter Thiel",
+        "contraryInsight": "If it were obviously good, someone would already be doing it"
+    },
+    {
+        "text": "Competition is for losers",
+        "category": "business",
+        "source": "Zero to One",
+        "contraryInsight": "Monopolies drive progress by having resources to innovate"
+    },
+    {
+        "text": "The most contrarian thing is not to oppose the crowd but to think for yourself",
+        "category": "philosophy",
+        "source": "Peter Thiel",
+        "contraryInsight": "True contrarianism isn't reflexive opposition"
+    },
+    {
+        "text": "Moving fast and breaking things is often slower than being deliberate",
+        "category": "technology",
+        "source": "Contrarian Tech",
+        "contraryInsight": "Technical debt compounds faster than development speed"
+    },
+    {
+        "text": "The best time to start a company is during a recession",
+        "category": "economics",
+        "source": "Startup Wisdom",
+        "contraryInsight": "Less competition, cheaper talent, and forced efficiency"
+    },
+    {
+        "text": "Being first to market is overrated",
+        "category": "business",
+        "source": "Business Strategy",
+        "contraryInsight": "Being last can mean learning from everyone else's mistakes"
+    },
+    {
+        "text": "Formal education can limit innovative thinking",
+        "category": "education",
+        "source": "Innovation Studies",
+        "contraryInsight": "Credentials create conformity; breakthroughs require unlearning"
+    },
+    {
+        "text": "The sharing economy isn't about sharing",
+        "category": "economics",
+        "source": "Economic Analysis",
+        "contraryInsight": "It's about monetizing underutilized assets"
+    },
+    {
+        "text": "Social networks make us less social",
+        "category": "society",
+        "source": "Digital Culture",
+        "contraryInsight": "Digital connections often replace deeper real relationships"
+    },
+    {
+        "text": "AI won't replace humans, but humans using AI will replace those who don't",
+        "category": "future",
+        "source": "Tech Trends",
+        "contraryInsight": "The divide isn't human vs machine, but augmented vs unaugmented"
+    },
+    {
+        "text": "Perfectionism is a form of procrastination",
+        "category": "philosophy",
+        "source": "Productivity Paradox",
+        "contraryInsight": "The pursuit of perfect prevents the achievement of good enough"
+    },
+    {
+        "text": "Working harder is often less effective than working less",
+        "category": "business",
+        "source": "Productivity Research",
+        "contraryInsight": "Constraints force creativity and prevent burnout"
+    },
+    {
+        "text": "The most valuable companies create new markets, not compete in existing ones",
+        "category": "innovation",
+        "source": "Blue Ocean Strategy",
+        "contraryInsight": "Competition validates markets but limits profits"
+    },
+    {
+        "text": "Transparency can reduce trust",
+        "category": "society",
+        "source": "Organizational Psychology",
+        "contraryInsight": "Some ambiguity allows for benefit of the doubt"
+    },
+    {
+        "text": "The best investment is often in what everyone else hates",
+        "category": "economics",
+        "source": "Contrarian Investing",
+        "contraryInsight": "Consensus creates overvaluation; pessimism creates opportunity"
+    },
+    {
+        "text": "Great products don't need marketing",
+        "category": "business",
+        "source": "Product Philosophy",
+        "contraryInsight": "Word of mouth from delighted users beats any ad campaign"
+    },
+    {
+        "text": "The future is already here, it's just not evenly distributed",
+        "category": "future",
+        "source": "William Gibson",
+        "contraryInsight": "Look at edge cases and extremes to see what's coming"
+    },
+    {
+        "text": "Raising money is a sign of weakness, not strength",
+        "category": "business",
+        "source": "Bootstrap Philosophy",
+        "contraryInsight": "Profitable companies don't need permission to exist"
+    },
+    {
+        "text": "The best way to predict the future is to invent it",
+        "category": "innovation",
+        "source": "Alan Kay",
+        "contraryInsight": "Builders shape reality more than analysts"
+    },
+    {
+        "text": "Experts are often the last to see disruption coming",
+        "category": "innovation",
+        "source": "Disruption Theory",
+        "contraryInsight": "Deep expertise creates blind spots to paradigm shifts"
+    },
+    {
+        "text": "Privacy is not about having something to hide",
+        "category": "society",
+        "source": "Digital Rights",
+        "contraryInsight": "It's about preserving the space for personal growth and change"
+    },
+    {
+        "text": "The best leaders are often introverts",
+        "category": "business",
+        "source": "Leadership Studies",
+        "contraryInsight": "Listening and thinking deeply beats charisma"
+    },
+    {
+        "text": "Failure is not a prerequisite for success",
+        "category": "philosophy",
+        "source": "Success Myths",
+        "contraryInsight": "Learning from others' failures is more efficient"
+    },
+    {
+        "text": "The most important problems are often the most boring",
+        "category": "innovation",
+        "source": "Problem Selection",
+        "contraryInsight": "Unsexy problems have less competition and bigger impact"
+    },
+    {
+        "text": "Remote work makes companies more productive, not less",
+        "category": "business",
+        "source": "Work Studies",
+        "contraryInsight": "Eliminating commutes and office politics frees focus"
+    },
+    {
+        "text": "Small teams outperform large teams",
+        "category": "business",
+        "source": "Team Dynamics",
+        "contraryInsight": "Communication overhead grows exponentially with size"
+    },
+    {
+        "text": "The best code is no code",
+        "category": "technology",
+        "source": "Software Philosophy",
+        "contraryInsight": "Every line written is a liability to maintain"
+    },
+    {
+        "text": "Simplicity is the ultimate sophistication",
+        "category": "philosophy",
+        "source": "Leonardo da Vinci",
+        "contraryInsight": "It takes genius to make complex things simple"
+    },
+    {
+        "text": "Constraints breed creativity",
+        "category": "innovation",
+        "source": "Creative Theory",
+        "contraryInsight": "Unlimited resources lead to unlimited waste"
+    },
+    {
+        "text": "The best time to plant a tree was 20 years ago. The second best time is now",
+        "category": "philosophy",
+        "source": "Chinese Proverb",
+        "contraryInsight": "Regret about timing is procrastination in disguise"
+    }
+]

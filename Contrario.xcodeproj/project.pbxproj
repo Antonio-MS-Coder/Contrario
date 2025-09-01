@@ -1,0 +1,899 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		017BD5FA2E3585FC00DAE687 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 017BD5F92E3585FC00DAE687 /* GoogleSignIn */; };
+		017BD5FC2E3585FC00DAE687 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 017BD5FB2E3585FC00DAE687 /* GoogleSignInSwift */; };
+		017BD5FF2E35866500DAE687 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 017BD5FE2E35866500DAE687 /* FirebaseAnalytics */; };
+		017BD6012E35866500DAE687 /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 017BD6002E35866500DAE687 /* FirebaseAnalyticsCore */; };
+		017BD6032E35866500DAE687 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 017BD6022E35866500DAE687 /* FirebaseAuth */; };
+		017BD6052E35866500DAE687 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 017BD6042E35866500DAE687 /* FirebaseCore */; };
+		017BD6072E35866500DAE687 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 017BD6062E35866500DAE687 /* FirebaseDatabase */; };
+		017BD6092E35866500DAE687 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 017BD6082E35866500DAE687 /* FirebaseFirestore */; };
+		017BD60B2E35866500DAE687 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 017BD60A2E35866500DAE687 /* FirebasePerformance */; };
+		01C87F192E371DE90008FC2E /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = 01C87F182E371DE90008FC2E /* FacebookBasics */; };
+		01C87F1B2E371DE90008FC2E /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 01C87F1A2E371DE90008FC2E /* FacebookCore */; };
+		17445C3CB649B3C0D8EEA60A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B7B6767767E52A413C6D25 /* Foundation.framework */; };
+		6868D388EE11F95582851AA1 /* ContrarioWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DACADCE30FE3BA3442A036ED /* ContrarioWidget.appex */; };
+		72FB1DEA9B952B62540F02AA /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E26AEF5EDB9A6393427EDD /* WidgetColors.swift */; };
+		CDB5765376161DEA002431C9 /* ContrarioWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FED1C6D403A3632A02E2EDD /* ContrarioWidget.swift */; };
+		EFAB90C53D4C1CD98D4AAC02 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97712032A0B7810267D93797 /* SharedDataManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		017BCF9A2E31EDD900DAE687 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 017BCF7E2E31EDD700DAE687 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 017BCF852E31EDD800DAE687;
+			remoteInfo = Contrario;
+		};
+		017BCFA42E31EDD900DAE687 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 017BCF7E2E31EDD700DAE687 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 017BCF852E31EDD800DAE687;
+			remoteInfo = Contrario;
+		};
+		CA11B014F1034AAE40477A95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 017BCF7E2E31EDD700DAE687 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E38B2DF23D37394595687285;
+			remoteInfo = ContrarioWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		32238469339D8A2BD8EAEA82 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6868D388EE11F95582851AA1 /* ContrarioWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		017BCF862E31EDD800DAE687 /* Contrario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contrario.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		017BCF992E31EDD900DAE687 /* ContrarioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContrarioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		017BCFA32E31EDD900DAE687 /* ContrarioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContrarioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04E26AEF5EDB9A6393427EDD /* WidgetColors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WidgetColors.swift; path = ContrarioWidget/WidgetColors.swift; sourceTree = "<group>"; };
+		0FED1C6D403A3632A02E2EDD /* ContrarioWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContrarioWidget.swift; path = ContrarioWidget/ContrarioWidget.swift; sourceTree = "<group>"; };
+		640F2AF3D84A6E34D115F1B7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = ContrarioWidget/Info.plist; sourceTree = "<group>"; };
+		97712032A0B7810267D93797 /* SharedDataManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SharedDataManager.swift; path = ContrarioWidget/SharedDataManager.swift; sourceTree = "<group>"; };
+		B2B7B6767767E52A413C6D25 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		DACADCE30FE3BA3442A036ED /* ContrarioWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ContrarioWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8BCBEDD74978A0F5F0159B8 /* ContrarioWidget.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; name = ContrarioWidget.entitlements; path = ContrarioWidget/ContrarioWidget.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		017BD21B2E31FA8C00DAE687 /* Exceptions for "Contrario" folder in "Contrario" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 017BCF852E31EDD800DAE687 /* Contrario */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		017BCF882E31EDD800DAE687 /* Contrario */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				017BD21B2E31FA8C00DAE687 /* Exceptions for "Contrario" folder in "Contrario" target */,
+			);
+			path = Contrario;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		017BCF832E31EDD800DAE687 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				017BD5FA2E3585FC00DAE687 /* GoogleSignIn in Frameworks */,
+				017BD6032E35866500DAE687 /* FirebaseAuth in Frameworks */,
+				017BD60B2E35866500DAE687 /* FirebasePerformance in Frameworks */,
+				017BD5FC2E3585FC00DAE687 /* GoogleSignInSwift in Frameworks */,
+				01C87F1B2E371DE90008FC2E /* FacebookCore in Frameworks */,
+				017BD5FF2E35866500DAE687 /* FirebaseAnalytics in Frameworks */,
+				017BD6052E35866500DAE687 /* FirebaseCore in Frameworks */,
+				017BD6092E35866500DAE687 /* FirebaseFirestore in Frameworks */,
+				01C87F192E371DE90008FC2E /* FacebookBasics in Frameworks */,
+				017BD6072E35866500DAE687 /* FirebaseDatabase in Frameworks */,
+				017BD6012E35866500DAE687 /* FirebaseAnalyticsCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		017BCF962E31EDD900DAE687 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		017BCFA02E31EDD900DAE687 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5178724258574523AC4187CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17445C3CB649B3C0D8EEA60A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		017BCF7D2E31EDD700DAE687 = {
+			isa = PBXGroup;
+			children = (
+				017BCF882E31EDD800DAE687 /* Contrario */,
+				017BCF872E31EDD800DAE687 /* Products */,
+				71059A109F8FD3CA136E5BD9 /* Frameworks */,
+				E1226FA6B75853CE00980280 /* ContrarioWidget */,
+			);
+			sourceTree = "<group>";
+		};
+		017BCF872E31EDD800DAE687 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				017BCF862E31EDD800DAE687 /* Contrario.app */,
+				017BCF992E31EDD900DAE687 /* ContrarioTests.xctest */,
+				017BCFA32E31EDD900DAE687 /* ContrarioUITests.xctest */,
+				DACADCE30FE3BA3442A036ED /* ContrarioWidget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		71059A109F8FD3CA136E5BD9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8C705780E8D74FD36903570A /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8C705780E8D74FD36903570A /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				B2B7B6767767E52A413C6D25 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		E1226FA6B75853CE00980280 /* ContrarioWidget */ = {
+			isa = PBXGroup;
+			children = (
+				0FED1C6D403A3632A02E2EDD /* ContrarioWidget.swift */,
+				97712032A0B7810267D93797 /* SharedDataManager.swift */,
+				04E26AEF5EDB9A6393427EDD /* WidgetColors.swift */,
+				F8BCBEDD74978A0F5F0159B8 /* ContrarioWidget.entitlements */,
+				640F2AF3D84A6E34D115F1B7 /* Info.plist */,
+			);
+			name = ContrarioWidget;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		017BCF852E31EDD800DAE687 /* Contrario */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 017BCFAD2E31EDD900DAE687 /* Build configuration list for PBXNativeTarget "Contrario" */;
+			buildPhases = (
+				017BCF822E31EDD800DAE687 /* Sources */,
+				017BCF832E31EDD800DAE687 /* Frameworks */,
+				017BCF842E31EDD800DAE687 /* Resources */,
+				32238469339D8A2BD8EAEA82 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0260FCFE861F59C897A05F9F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				017BCF882E31EDD800DAE687 /* Contrario */,
+			);
+			name = Contrario;
+			productName = Contrario;
+			productReference = 017BCF862E31EDD800DAE687 /* Contrario.app */;
+			productType = "com.apple.product-type.application";
+		};
+		017BCF982E31EDD900DAE687 /* ContrarioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 017BCFB02E31EDD900DAE687 /* Build configuration list for PBXNativeTarget "ContrarioTests" */;
+			buildPhases = (
+				017BCF952E31EDD900DAE687 /* Sources */,
+				017BCF962E31EDD900DAE687 /* Frameworks */,
+				017BCF972E31EDD900DAE687 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				017BCF9B2E31EDD900DAE687 /* PBXTargetDependency */,
+			);
+			name = ContrarioTests;
+			productName = ContrarioTests;
+			productReference = 017BCF992E31EDD900DAE687 /* ContrarioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		017BCFA22E31EDD900DAE687 /* ContrarioUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 017BCFB32E31EDD900DAE687 /* Build configuration list for PBXNativeTarget "ContrarioUITests" */;
+			buildPhases = (
+				017BCF9F2E31EDD900DAE687 /* Sources */,
+				017BCFA02E31EDD900DAE687 /* Frameworks */,
+				017BCFA12E31EDD900DAE687 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				017BCFA52E31EDD900DAE687 /* PBXTargetDependency */,
+			);
+			name = ContrarioUITests;
+			productName = ContrarioUITests;
+			productReference = 017BCFA32E31EDD900DAE687 /* ContrarioUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		E38B2DF23D37394595687285 /* ContrarioWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B6AE8D053A0F34D8D1B64D0E /* Build configuration list for PBXNativeTarget "ContrarioWidget" */;
+			buildPhases = (
+				1E866D9177A77A97641D0E88 /* Sources */,
+				5178724258574523AC4187CA /* Frameworks */,
+				E7AD192126C889904FD81105 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ContrarioWidget;
+			productName = ContrarioWidget;
+			productReference = DACADCE30FE3BA3442A036ED /* ContrarioWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		017BCF7E2E31EDD700DAE687 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					017BCF852E31EDD800DAE687 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					017BCF982E31EDD900DAE687 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 017BCF852E31EDD800DAE687;
+					};
+					017BCFA22E31EDD900DAE687 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 017BCF852E31EDD800DAE687;
+					};
+				};
+			};
+			buildConfigurationList = 017BCF812E31EDD700DAE687 /* Build configuration list for PBXProject "Contrario" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 017BCF7D2E31EDD700DAE687;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				017BD5F82E3585FC00DAE687 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				017BD5FD2E35866400DAE687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				01C87F172E371DE90008FC2E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 017BCF872E31EDD800DAE687 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				017BCF852E31EDD800DAE687 /* Contrario */,
+				017BCF982E31EDD900DAE687 /* ContrarioTests */,
+				017BCFA22E31EDD900DAE687 /* ContrarioUITests */,
+				E38B2DF23D37394595687285 /* ContrarioWidget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		017BCF842E31EDD800DAE687 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		017BCF972E31EDD900DAE687 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		017BCFA12E31EDD900DAE687 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7AD192126C889904FD81105 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		017BCF822E31EDD800DAE687 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		017BCF952E31EDD900DAE687 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		017BCF9F2E31EDD900DAE687 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E866D9177A77A97641D0E88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDB5765376161DEA002431C9 /* ContrarioWidget.swift in Sources */,
+				EFAB90C53D4C1CD98D4AAC02 /* SharedDataManager.swift in Sources */,
+				72FB1DEA9B952B62540F02AA /* WidgetColors.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		017BCF9B2E31EDD900DAE687 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 017BCF852E31EDD800DAE687 /* Contrario */;
+			targetProxy = 017BCF9A2E31EDD900DAE687 /* PBXContainerItemProxy */;
+		};
+		017BCFA52E31EDD900DAE687 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 017BCF852E31EDD800DAE687 /* Contrario */;
+			targetProxy = 017BCFA42E31EDD900DAE687 /* PBXContainerItemProxy */;
+		};
+		0260FCFE861F59C897A05F9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ContrarioWidget;
+			target = E38B2DF23D37394595687285 /* ContrarioWidget */;
+			targetProxy = CA11B014F1034AAE40477A95 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		017BCFAB2E31EDD900DAE687 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 2G8MAFZB7R;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		017BCFAC2E31EDD900DAE687 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2G8MAFZB7R;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		017BCFAE2E31EDD900DAE687 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Contrario/Contrario.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2G8MAFZB7R;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Contrario-Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Se necesita para guardar fotos";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Se necesita para guardar fotos";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lck.Contrario;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Debug;
+		};
+		017BCFAF2E31EDD900DAE687 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Contrario/Contrario.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2G8MAFZB7R;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Contrario-Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Se necesita para guardar fotos";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Se necesita para guardar fotos";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lck.Contrario;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
+		017BCFB12E31EDD900DAE687 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2G8MAFZB7R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lck.ContrarioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Contrario.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Contrario";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Debug;
+		};
+		017BCFB22E31EDD900DAE687 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2G8MAFZB7R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lck.ContrarioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Contrario.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Contrario";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
+		017BCFB42E31EDD900DAE687 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2G8MAFZB7R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lck.ContrarioUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = Contrario;
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Debug;
+		};
+		017BCFB52E31EDD900DAE687 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2G8MAFZB7R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lck.ContrarioUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = Contrario;
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
+		8B324C939CEEFAF6EAF310A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = ContrarioWidget/ContrarioWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_LANGUAGE = en;
+				DEVELOPMENT_TEAM = 2G8MAFZB7R;
+				EXECUTABLE_NAME = ContrarioWidget;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ContrarioWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Contrario;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lck.Contrario.widget;
+				PRODUCT_MODULE_NAME = ContrarioWidget;
+				PRODUCT_NAME = ContrarioWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		94014C1B200D138D71D62AF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = ContrarioWidget/ContrarioWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_LANGUAGE = en;
+				DEVELOPMENT_TEAM = 2G8MAFZB7R;
+				EXECUTABLE_NAME = ContrarioWidget;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ContrarioWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Contrario;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lck.Contrario.widget;
+				PRODUCT_MODULE_NAME = ContrarioWidget;
+				PRODUCT_NAME = ContrarioWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		017BCF812E31EDD700DAE687 /* Build configuration list for PBXProject "Contrario" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				017BCFAB2E31EDD900DAE687 /* Debug */,
+				017BCFAC2E31EDD900DAE687 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		017BCFAD2E31EDD900DAE687 /* Build configuration list for PBXNativeTarget "Contrario" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				017BCFAE2E31EDD900DAE687 /* Debug */,
+				017BCFAF2E31EDD900DAE687 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		017BCFB02E31EDD900DAE687 /* Build configuration list for PBXNativeTarget "ContrarioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				017BCFB12E31EDD900DAE687 /* Debug */,
+				017BCFB22E31EDD900DAE687 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		017BCFB32E31EDD900DAE687 /* Build configuration list for PBXNativeTarget "ContrarioUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				017BCFB42E31EDD900DAE687 /* Debug */,
+				017BCFB52E31EDD900DAE687 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B6AE8D053A0F34D8D1B64D0E /* Build configuration list for PBXNativeTarget "ContrarioWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B324C939CEEFAF6EAF310A6 /* Release */,
+				94014C1B200D138D71D62AF3 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		017BD5F82E3585FC00DAE687 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		017BD5FD2E35866400DAE687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
+		01C87F172E371DE90008FC2E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		017BD5F92E3585FC00DAE687 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 017BD5F82E3585FC00DAE687 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		017BD5FB2E3585FC00DAE687 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 017BD5F82E3585FC00DAE687 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		017BD5FE2E35866500DAE687 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 017BD5FD2E35866400DAE687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		017BD6002E35866500DAE687 /* FirebaseAnalyticsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 017BD5FD2E35866400DAE687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsCore;
+		};
+		017BD6022E35866500DAE687 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 017BD5FD2E35866400DAE687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		017BD6042E35866500DAE687 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 017BD5FD2E35866400DAE687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		017BD6062E35866500DAE687 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 017BD5FD2E35866400DAE687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		017BD6082E35866500DAE687 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 017BD5FD2E35866400DAE687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		017BD60A2E35866500DAE687 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 017BD5FD2E35866400DAE687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
+		};
+		01C87F182E371DE90008FC2E /* FacebookBasics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01C87F172E371DE90008FC2E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookBasics;
+		};
+		01C87F1A2E371DE90008FC2E /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01C87F172E371DE90008FC2E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 017BCF7E2E31EDD700DAE687 /* Project object */;
+}

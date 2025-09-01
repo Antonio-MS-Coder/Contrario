@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Marea Baja necesita acceso a tu galería para guardar las tarjetas con frases</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Marea Baja necesita acceso a tu galería para guardar las tarjetas con frases</string>
+	<key>NSUserNotificationsUsageDescription</key>
+	<string>Marea Baja te enviará recordatorios diarios con frases de apoyo emocional</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Marea Baja utiliza esta información para mostrarte anuncios más relevantes y mejorar tu experiencia</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>Google Sign-In</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.279404135242-85ec8u73rlsca0j9aoe1m0fnu92gbq25</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>Facebook</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb687476214456543</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>googlechrome</string>
+		<string>safari</string>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<key>FacebookAppID</key>
+	<string>687476214456543</string>
+	<key>FacebookClientToken</key>
+	<string>25e5607b2ae2ea454bd9198ee07453c5</string>
+	<key>FacebookDisplayName</key>
+	<string>Marea Baja</string>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<true/>
+	<key>FacebookAdvertiserIDCollectionEnabled</key>
+	<true/>
+</dict>
+</plist>
